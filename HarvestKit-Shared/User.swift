@@ -43,7 +43,12 @@ public struct User {
      - note: Only populated when created from the Who Am I call
      */
     public var admin: Bool?
-    
+
+    /**
+     A boolean to indicate whether or not the user is a contractor in this system.
+     */
+    public var contractor: Bool?
+
     /**
      The name of the department that the user belongs to
      */
@@ -116,6 +121,7 @@ public struct User {
         email = userDictionary["email"] as? String
         active = userDictionary["is_active"] as? Bool
         admin = userDictionary["admin"] as? Bool
+        contractor = userDictionary["contractor"] as? Bool
         department = userDictionary["department"] as? String
         timezoneIdentifier = userDictionary["timezone_identifier"] as? String
         timezoneCity = userDictionary["timezone"] as? String
