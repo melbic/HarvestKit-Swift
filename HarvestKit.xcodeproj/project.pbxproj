@@ -65,6 +65,10 @@
 		49F8136B1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136C1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136D1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
+		990F909B1D67A8A00084969E /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F909A1D67A8A00084969E /* ReportsController.swift */; };
+		990F909C1D67A8A00084969E /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F909A1D67A8A00084969E /* ReportsController.swift */; };
+		990F909D1D67A8A00084969E /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F909A1D67A8A00084969E /* ReportsController.swift */; };
+		990F909E1D67A8A00084969E /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F909A1D67A8A00084969E /* ReportsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +136,7 @@
 		49EE8AB31C4A7059007BFC8B /* TimersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimersController.swift; path = "HarvestKit-Shared/TimersController.swift"; sourceTree = "<group>"; };
 		49EE8AB71C4A739C007BFC8B /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = "HarvestKit-Shared/Contact.swift"; sourceTree = "<group>"; };
 		49F8136A1CDD123300639B3A /* ClientsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientsController.swift; path = "HarvestKit-Shared/ClientsController.swift"; sourceTree = "<group>"; };
+		990F909A1D67A8A00084969E /* ReportsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +261,7 @@
 				49EE8AAF1C4A6F3E007BFC8B /* ContactsController.swift */,
 				49EE8AB31C4A7059007BFC8B /* TimersController.swift */,
 				49B59CCF1C4AB3DD000BE592 /* AccountController.swift */,
+				990F909A1D67A8A00084969E /* ReportsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -509,6 +515,7 @@
 				49B59CD01C4AB3DD000BE592 /* AccountController.swift in Sources */,
 				490A24991C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD41C4AB5D6000BE592 /* Company.swift in Sources */,
+				990F909B1D67A8A00084969E /* ReportsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +536,7 @@
 				49B59CD11C4AB3DD000BE592 /* AccountController.swift in Sources */,
 				490A249A1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD51C4AB5D6000BE592 /* Company.swift in Sources */,
+				990F909C1D67A8A00084969E /* ReportsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +557,7 @@
 				49B59CD21C4AB3DD000BE592 /* AccountController.swift in Sources */,
 				490A249B1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD61C4AB5D6000BE592 /* Company.swift in Sources */,
+				990F909D1D67A8A00084969E /* ReportsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				990F909E1D67A8A00084969E /* ReportsController.swift in Sources */,
 				49AC1C5A1C42E75600E420B4 /* TestBase.swift in Sources */,
 				49AC1C581C42E73200E420B4 /* ExtensionTests.swift in Sources */,
 				49EC2D061C42AC9C00B9FF49 /* HarvestKitTests.swift in Sources */,
