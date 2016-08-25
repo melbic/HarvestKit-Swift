@@ -60,7 +60,18 @@ public final class ReportsController {
                 completion(timers: nil, error: _error)
                 return
             }
+            
+            if let timeReportResponseArray = response?.array as? Array<[String: AnyObject]> {
 
+                let timersArray = timeReportResponseArray.map { dayEntry in
+                    Timer(dictionary: dayEntry["day_entry"])
+                    }
+                
+                completionHandler(timers: timersArray, error: nil)
+                return;
+            }
+            
+            completionHandler(timers: nil, error: nil)
         }
     }
     
@@ -80,8 +91,14 @@ public final class ReportsController {
                 return
             }
             
+            if let timeReportResponseArray = response?.array as? Array<[String: AnyObject]> {
+                
+                let timersArray = timeReportResponseArray.map { dayEntry in
+                    Timer(dictionary: dayEntry["day_entry"])
+                }
+                
+                completionHandler(timers: timersArray, requestError: nil)
+            }
         }
-
     }
-
 }
