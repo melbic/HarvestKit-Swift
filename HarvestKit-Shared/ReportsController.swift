@@ -64,14 +64,14 @@ public final class ReportsController {
             if let timeReportResponseArray = response?.array as? Array<[String: AnyObject]> {
 
                 let timersArray = timeReportResponseArray.map { dayEntry in
-                    Timer(dictionary: dayEntry["day_entry"])
+                    Timer(dictionary: dayEntry["day_entry"] as! [String : AnyObject])
                     }
                 
-                completionHandler(timers: timersArray, error: nil)
+                completion(timers: timersArray, error: nil)
                 return;
             }
             
-            completionHandler(timers: nil, error: nil)
+            completion(timers: nil, error: nil)
         }
     }
     
@@ -94,10 +94,10 @@ public final class ReportsController {
             if let timeReportResponseArray = response?.array as? Array<[String: AnyObject]> {
                 
                 let timersArray = timeReportResponseArray.map { dayEntry in
-                    Timer(dictionary: dayEntry["day_entry"])
+                    Timer(dictionary: dayEntry["day_entry"] as! [String : AnyObject])
                 }
                 
-                completionHandler(timers: timersArray, requestError: nil)
+                completion(timers: timersArray, error: nil)
             }
         }
     }

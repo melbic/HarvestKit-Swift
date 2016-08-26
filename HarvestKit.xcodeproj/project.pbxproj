@@ -66,6 +66,8 @@
 		49F8136C1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136D1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		7C6A71FB1D6EAC67000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
+		7C6A729A1D6EF81A000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
+		7C6A729B1D6EF81B000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -533,6 +535,7 @@
 				49B59CD11C4AB3DD000BE592 /* AccountController.swift in Sources */,
 				490A249A1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD51C4AB5D6000BE592 /* Company.swift in Sources */,
+				7C6A729A1D6EF81A000064A0 /* ReportsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +556,7 @@
 				49B59CD21C4AB3DD000BE592 /* AccountController.swift in Sources */,
 				490A249B1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD61C4AB5D6000BE592 /* Company.swift in Sources */,
+				7C6A729B1D6EF81B000064A0 /* ReportsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
