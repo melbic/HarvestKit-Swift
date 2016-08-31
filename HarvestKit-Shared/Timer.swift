@@ -29,9 +29,14 @@ public struct Timer {
     public var clientName: String?
     
     /**
+     The unique identifier for the user
+     */
+    public var userIdentifier: Int?
+    
+    /**
     The unique identifier for the project
     */
-    public var projectIdentifier: String?
+    public var projectIdentifier: Int?
     
     /**
     The name of the project that the timer falls under
@@ -41,12 +46,17 @@ public struct Timer {
     /**
      The unique identifier for the task
      */
-    public var taskIdentifier: String?
+    public var taskIdentifier: Int?
     /**
      
     The name of the task that the timer falls under
     */
     public var taskName: String?
+    
+    /**
+     The date for which, the time is tracked
+     */
+    public var spentAt: String?
     
     /**
      A boolean to indicate whether or not the timer is currently active.
@@ -74,10 +84,12 @@ public struct Timer {
         identifier = dictionary["id"] as? Int
         notes = dictionary["notes"] as? String
         clientName = dictionary["client"] as? String
-        projectIdentifier = dictionary["project_id"] as? String
+        userIdentifier = dictionary["user_id"] as? Int ?? Int((dictionary["user_id"] as? String)!)
+        projectIdentifier = dictionary["project_id"] as? Int ?? Int((dictionary["project_id"] as? String)!)
         projectName = dictionary["project"] as? String
-        taskIdentifier = dictionary["task_id"] as? String
+        taskIdentifier = dictionary["task_id"] as? Int ?? Int((dictionary["task_id"] as? String)!)
         taskName = dictionary["task"] as? String
+        spentAt = dictionary["spent_at"] as? String
         hours = dictionary["hours"] as? Double
         hoursWithoutTimer = dictionary["hours_without_timer"] as? Double
         
