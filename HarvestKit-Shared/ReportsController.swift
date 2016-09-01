@@ -82,7 +82,7 @@ public final class ReportsController {
             return
         }
 
-        requestController.get("people/(:userIdentifier!)/entries?from=(:from)&to=(:to)", withURLParamDictionary:["userIdentifier" : user.identifier!,"from": self.dateString(start), "to":self.dateString(end)]) {
+        requestController.get("people/(:userIdentifier)/entries?from=(:from)&to=(:to)", withURLParamDictionary:["userIdentifier" : user.identifier!,"from": self.dateString(start), "to":self.dateString(end)]) {
 
             (response: TSCRequestResponse?, error: NSError?) in
 
