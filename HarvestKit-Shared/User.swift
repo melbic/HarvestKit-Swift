@@ -120,8 +120,8 @@ public struct User {
         lastName = userDictionary["last_name"] as? String
         email = userDictionary["email"] as? String
         active = userDictionary["is_active"] as? Bool
-        admin = userDictionary["admin"] as? Bool
-        contractor = userDictionary["contractor"] as? Bool
+        admin = userDictionary["is_admin"] as? Bool
+        contractor = userDictionary["is_contractor"] as? Bool
         department = userDictionary["department"] as? String
         timezoneIdentifier = userDictionary["timezone_identifier"] as? String
         timezoneCity = userDictionary["timezone"] as? String
