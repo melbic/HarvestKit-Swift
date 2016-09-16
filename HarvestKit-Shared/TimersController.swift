@@ -101,13 +101,13 @@ public final class TimersController {
         //Configures date if specified
         if let givenDate = date {
             
-            url = url.URLByAppendingPathComponent(givenDate.dayInYear)
-            url = url.URLByAppendingPathComponent(givenDate.year)
+            url = url.URLByAppendingPathComponent(givenDate.dayInYear)!
+            url = url.URLByAppendingPathComponent(givenDate.year)!
         }
         
         //Configures user if specified
         if let givenUser = user, let userId = givenUser.identifier {
-            url = url.URLByAppendingPathComponent("?of_user=\(userId)")
+            url = url.URLByAppendingPathComponent("?of_user=\(userId)")!
         }
         
         //Check we have a valid URL
