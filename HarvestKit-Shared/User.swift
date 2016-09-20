@@ -108,6 +108,8 @@ public struct User {
      */
     public var avatarURL: NSURL?
     
+    public var updatedAt: String?
+    
     internal init?(dictionary: [String: AnyObject]) {
         
         guard let userDictionary = dictionary["user"] as? [String: AnyObject] else {
@@ -125,6 +127,7 @@ public struct User {
         department = userDictionary["department"] as? String
         timezoneIdentifier = userDictionary["timezone_identifier"] as? String
         timezoneCity = userDictionary["timezone"] as? String
+        updatedAt = userDictionary["updated_at"] as? String
         
         if let projectManagerDictionary = userDictionary["project_manager"] as? [String: AnyObject] {
             
