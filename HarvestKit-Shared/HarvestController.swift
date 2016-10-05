@@ -46,7 +46,12 @@ public final class HarvestController {
      The controller for managing clients
      */
     public let clientsController: ClientsController
-    
+
+    /**
+     The controller for managing reports
+     */
+    public let reportsController: ReportsController
+
     /**
      Initialises a new harvest controller with the given credentials. You must supply credentials to log in and access the harvest API.
      
@@ -74,7 +79,8 @@ public final class HarvestController {
         contactsController = ContactsController(requestController: requestController)
         accountController = AccountController(requestController: requestController)
         clientsController = ClientsController(requestController: requestController)
-        
+        reportsController = ReportsController(requestController: requestController)
+
     }
     
     //MARK: - Users
