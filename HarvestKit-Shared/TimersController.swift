@@ -43,7 +43,7 @@ public final class TimersController {
     - requires: `projectIdentifier` and `taskIdentifier` on the timer object
     - note: If the timer does not have hours set then the API will start the timer running
     */
-    public func create(timer: Timer, completionHandler: (Timer?, NSError?) -> ()) {
+    public func create(_ timer: Timer, completionHandler: @escaping (Timer?, NSError?) -> ()) {
         
         guard let _ = timer.projectIdentifier else {
             
@@ -59,10 +59,10 @@ public final class TimersController {
             return
         }
         
-        requestController.post("daily/add", bodyParams: timer.serialisedObject) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.post("daily/add", bodyParams: timer.serialisedObject) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(nil, error)
+                completionHandler(nil, error as NSError?)
                 return
             }
             
@@ -80,9 +80,7 @@ public final class TimersController {
             
             let error = NSError(domain: "co.uk.mattcheetham.harvestkit", code: 400, userInfo: [NSLocalizedDescriptionKey: "The server did not return a valid timer object"])
             completionHandler(nil, error)
-            
         }
-        
     }
     
     //MARK: - Retrieving Timers
@@ -94,24 +92,24 @@ public final class TimersController {
     - parameter date: The date as an NSDate to return timers for. If no date is supplied today will be used instead
     - parameter completionHandler: The completion handler to return timers and errors to
     */
-    public func getTimers(user: User?, date: NSDate?, completionHandler: ([Timer?]?, NSError?) -> ()) {
+    public func getTimers(_ user: User?, date: Date?, completionHandler: @escaping ([Timer?]?, NSError?) -> ()) {
         
-        var url:NSURL! = NSURL(string: "daily")
+        var url:URL! = URL(string: "daily")
         
         //Configures date if specified
         if let givenDate = date {
             
-            url = url.URLByAppendingPathComponent(givenDate.dayInYear)!
-            url = url.URLByAppendingPathComponent(givenDate.year)!
+            url = url.appendingPathComponent(givenDate.dayInYear)
+            url = url.appendingPathComponent(givenDate.year)
         }
         
         //Configures user if specified
         if let givenUser = user, let userId = givenUser.identifier {
-            url = url.URLByAppendingPathComponent("?of_user=\(userId)")!
+            url = url.appendingPathComponent("?of_user=\(userId)")
         }
         
         //Check we have a valid URL
-        guard let path = url.path else {
+        guard let path = url?.path else {
             
             let error = NSError(domain: "co.uk.mattcheetham.harvestkit", code: 400, userInfo: [NSLocalizedDescriptionKey: "Data supplied did not result in a valid request for the Harvest API. Please check your date object is valid (if supplied) and that your given user has a valid identifier (if supplied)"])
             completionHandler(nil, error)
@@ -119,10 +117,10 @@ public final class TimersController {
         }
         
         //Makes the request for timers
-        requestController.get(path) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.get(path) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(nil, error)
+                completionHandler(nil, error as NSError?)
                 return;
             }
             
@@ -146,7 +144,7 @@ public final class TimersController {
      - parameter user: The user to look up the data for. If no user is specified, the authenticated user will be used
      - parameter completionHandler: The completion handler to return timers and errors to
      */
-    public func getTimers(user: User?, completionHandler: ([Timer?]?, NSError?) -> ()) {
+    public func getTimers(_ user: User?, completionHandler: @escaping ([Timer?]?, NSError?) -> ()) {
         getTimers(user, date: nil, completionHandler: completionHandler)
     }
     
@@ -156,7 +154,7 @@ public final class TimersController {
      - parameter date: THe date as an NSDate to return timers for. If no date is supplied today will be used instead
      - parameter completionHandler: The completion handler to return timers and errors to
      */
-    public func getTimers(date: NSDate?, completionHandler: ([Timer?]?, NSError?) -> ()) {
+    public func getTimers(_ date: Date?, completionHandler: @escaping ([Timer?]?, NSError?) -> ()) {
         getTimers(nil, date: date, completionHandler: completionHandler)
     }
     
@@ -165,7 +163,7 @@ public final class TimersController {
      
      - parameter completionHandler: The completion handler to return timers and errors to
      */
-    public func getTimers(completionHandler: ([Timer?]?, NSError?) -> ()) {
+    public func getTimers(_ completionHandler: @escaping ([Timer?]?, NSError?) -> ()) {
         getTimers(nil, date: nil, completionHandler: completionHandler)
     }
     
@@ -175,12 +173,12 @@ public final class TimersController {
      - parameter identifier: The identifier for a timer
      - parameter completionHandler: The completion handler to return the timer and errors to
      */
-    public func getTimer(identifier: Int, completionHandler: (Timer?, NSError?) -> ()) {
+    public func getTimer(_ identifier: Int, completionHandler: @escaping (Timer?, NSError?) -> ()) {
         
-        requestController.get("daily/show/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":identifier]) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.get("daily/show/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":identifier]) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(nil, error)
+                completionHandler(nil, error as NSError?)
                 return
             }
             
@@ -200,7 +198,6 @@ public final class TimersController {
             completionHandler( nil, error)
             
         }
-        
     }
     
     //MARK: Adjusting Timers
@@ -213,7 +210,7 @@ public final class TimersController {
     
     - note: if your account uses timestamp timers, timers cannot be restarted. Instead, a new timer will be created with the same project, task, and notes.
     */
-    public func toggle(timer: Timer?, completionHandler: (Bool?, Timer?, NSError?) -> ()) {
+    public func toggle(_ timer: Timer?, completionHandler: @escaping (Bool?, Timer?, NSError?) -> ()) {
         
         guard let givenTimer = timer, let timerIdentifier = givenTimer.identifier else {
             let error = NSError(domain: "co.uk.mattcheetham.harvestkit", code: 1000, userInfo: [NSLocalizedDescriptionKey: "No timer supplied or timer did not have an ID"])
@@ -221,10 +218,10 @@ public final class TimersController {
             return;
         }
         
-        requestController.get("daily/timer/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier]) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.get("daily/timer/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier]) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(false, nil, error)
+                completionHandler(false, nil, error as NSError?)
                 return;
             }
             
@@ -252,7 +249,7 @@ public final class TimersController {
      - parameter timer: The timer to delete
      - parameter completionHandler: The completion handler to return request errors to
      */
-    public func delete(timer: Timer?, completionHandler: (NSError?) -> ()) {
+    public func delete(_ timer: Timer?, completionHandler: @escaping (NSError?) -> ()) {
         
         guard let givenTimer = timer, let timerIdentifier = givenTimer.identifier else {
             let error = NSError(domain: "co.uk.mattcheetham.harvestkit", code: 1000, userInfo: [NSLocalizedDescriptionKey: "No timer supplied or timer did not have an ID"])
@@ -260,17 +257,16 @@ public final class TimersController {
             return;
         }
         
-        requestController.delete("daily/delete/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier]) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.delete("daily/delete/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier]) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(error)
+                completionHandler(error as NSError?)
                 return;
             }
             
             completionHandler(nil)
             
         }
-        
     }
     
     /**
@@ -279,7 +275,7 @@ public final class TimersController {
      - parameter timer: The timer to update. You may modify a timer returned from another request or create a new one that has a valid identifier
      - parameter completionHandler: The completion handler to return request errors to as well as the updated timer
      */
-    public func update(timer: Timer, completionHandler: (Timer?, NSError?) -> ()) {
+    public func update(_ timer: Timer, completionHandler: @escaping (Timer?, NSError?) -> ()) {
         
         guard let timerIdentifier = timer.identifier else {
             let error = NSError(domain: "co.uk.mattcheetham.harvestkit", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Supplied timer does not have an identifier"])
@@ -287,10 +283,10 @@ public final class TimersController {
             return;
         }
         
-        requestController.post("daily/update/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier], bodyParams: timer.serialisedObject) { (response: TSCRequestResponse?, requestError: NSError?) -> Void in
+        requestController.post("daily/update/(:timerIdentifier)", withURLParamDictionary: ["timerIdentifier":timerIdentifier], bodyParams: timer.serialisedObject) { (response: TSCRequestResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
-                completionHandler(nil, error)
+                completionHandler(nil, error as NSError?)
                 return
             }
             
@@ -312,7 +308,6 @@ public final class TimersController {
             completionHandler(nil, error)
             return
         }
-        
     }
 
     

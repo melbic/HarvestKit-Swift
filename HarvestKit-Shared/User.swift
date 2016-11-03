@@ -106,7 +106,7 @@ public struct User {
      The URL to the users avatar if they have one
      - note: Only populated when created from the Who Am I call
      */
-    public var avatarURL: NSURL?
+    public var avatarURL: URL?
     
     public var updatedAt: String?
     
@@ -141,7 +141,7 @@ public struct User {
         timestampTimers = userDictionary["timestamp_timers"] as? Bool
         
         if let avatarURLString = userDictionary["avatar_url"] as? String {
-            avatarURL = NSURL(string: avatarURLString)
+            avatarURL = URL(string: avatarURLString)
         }
         
     }

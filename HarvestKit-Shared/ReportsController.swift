@@ -27,7 +27,7 @@ public final class ReportsController {
      */
     public let requestController: TSCRequestController
 
-    let harvestReportDateFormatter = NSDateFormatter()
+    let harvestReportDateFormatter = DateFormatter()
     
 
     /**
@@ -40,24 +40,24 @@ public final class ReportsController {
         self.harvestReportDateFormatter.dateFormat = "yyyyMMdd"
     }
 
-    internal func dateString(date: NSDate) -> String {
+    internal func dateString(_ date: Date) -> String {
 
-        return self.harvestReportDateFormatter.stringFromDate(date)
+        return self.harvestReportDateFormatter.string(from: date)
     }
 
-    public func getTimeReport(project: Project, start: NSDate, end: NSDate, completion: (timers: [Timer?]?, error: NSError?) -> ()) {
+    public func getTimeReport(_ project: Project, start: Date, end: Date, completion: @escaping (_ timers: [Timer?]?, _ error: Error?) -> ()) {
 
         guard let _ = project.name else {
-            completion(timers: nil, error: NSError(domain: "", code: 0, userInfo: nil))
+            completion(nil, NSError(domain: "", code: 0, userInfo: nil))
             return
         }
 
         requestController.get("projects/(:projectIdentifier)/entries?from=(:from)&to=(:to)", withURLParamDictionary:["projectIdentifier" : project.identifier!, "from": self.dateString(start), "to":self.dateString(end)]) {
 
-            (response: TSCRequestResponse?, error: NSError?) in
+            (response: TSCRequestResponse?, error: Error?) in
 
             if let _error = error {
-                completion(timers: nil, error: _error)
+                completion(nil, _error)
                 return
             }
             
@@ -67,27 +67,27 @@ public final class ReportsController {
                     Timer(dictionary: dayEntry["day_entry"] as! [String : AnyObject])
                     }
                 
-                completion(timers: timersArray, error: nil)
+                completion(timersArray, nil)
                 return;
             }
             
-            completion(timers: nil, error: nil)
+            completion(nil, nil)
         }
     }
     
-    public func getTimeReport(user: User, start: NSDate, end: NSDate, completion: (timers: [Timer?]?, error: NSError?) -> ()) {
+    public func getTimeReport(_ user: User, start: Date, end: Date, completion: @escaping (_ timers: [Timer?]?, _ error: Error?) -> ()) {
 
         guard let _ = user.identifier else {
-            completion(timers: nil, error: NSError(domain: "", code: 0, userInfo: nil))
+            completion(nil, NSError(domain: "", code: 0, userInfo: nil))
             return
         }
 
         requestController.get("people/(:userIdentifier)/entries?from=(:from)&to=(:to)", withURLParamDictionary:["userIdentifier" : user.identifier!,"from": self.dateString(start), "to":self.dateString(end)]) {
 
-            (response: TSCRequestResponse?, error: NSError?) in
+            (response: TSCRequestResponse?, error: Error?) in
 
             if let _error = error {
-                completion(timers: nil, error: _error)
+                completion(nil, _error)
                 return
             }
             
@@ -97,7 +97,7 @@ public final class ReportsController {
                     Timer(dictionary: dayEntry["day_entry"] as! [String : AnyObject])
                 }
                 
-                completion(timers: timersArray, error: nil)
+                completion(timersArray, nil)
             }
         }
     }
