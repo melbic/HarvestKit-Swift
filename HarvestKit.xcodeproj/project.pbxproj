@@ -434,6 +434,7 @@
 					};
 					49DBB1D81BFF963400640F31 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0810;
 					};
 					49EC2D021C42AC9C00B9FF49 = {
 						CreatedOnToolsVersion = 7.2;
@@ -800,6 +801,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USE_HEADERMAP = YES;
 			};
 			name = Debug;
@@ -826,6 +828,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USE_HEADERMAP = YES;
 			};
 			name = Release;
