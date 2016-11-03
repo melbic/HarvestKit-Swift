@@ -800,7 +800,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USE_HEADERMAP = NO;
+				USE_HEADERMAP = YES;
 			};
 			name = Debug;
 		};
@@ -826,7 +826,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USE_HEADERMAP = NO;
+				USE_HEADERMAP = YES;
 			};
 			name = Release;
 		};
