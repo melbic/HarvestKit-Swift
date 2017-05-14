@@ -65,6 +65,9 @@
 		49F8136B1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136C1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136D1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
+		650EB78F6E6A5033E614764A /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
+		650EB82A854C5C22B917781B /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
+		650EBE07D86BA874EA2B44E5 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
 		7C6A71FB1D6EAC67000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
 		7C6A729A1D6EF81A000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
 		7C6A729B1D6EF81B000064A0 /* ReportsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */; };
@@ -135,6 +138,7 @@
 		49EE8AB31C4A7059007BFC8B /* TimersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimersController.swift; path = "HarvestKit-Shared/TimersController.swift"; sourceTree = "<group>"; };
 		49EE8AB71C4A739C007BFC8B /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = "HarvestKit-Shared/Contact.swift"; sourceTree = "<group>"; };
 		49F8136A1CDD123300639B3A /* ClientsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientsController.swift; path = "HarvestKit-Shared/ClientsController.swift"; sourceTree = "<group>"; };
+		650EBA685D8BABDD25092F78 /* NetworkRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportsController.swift; path = "HarvestKit-Shared/ReportsController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +200,7 @@
 				49EC2D041C42AC9C00B9FF49 /* HarvestKitTests */,
 				490D87271BFDDCD200ADE0F1 /* Products */,
 				490D874A1BFDDD4B00ADE0F1 /* Supporting Frameworks */,
+				650EB1CE18C05077742C6F4C /* Networking */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,6 +315,14 @@
 				49EC2D071C42AC9C00B9FF49 /* Info.plist */,
 			);
 			path = HarvestKitTests;
+			sourceTree = "<group>";
+		};
+		650EB1CE18C05077742C6F4C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				650EBA685D8BABDD25092F78 /* NetworkRequests.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,6 +532,7 @@
 				490A24991C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD41C4AB5D6000BE592 /* Company.swift in Sources */,
 				7C6A71FB1D6EAC67000064A0 /* ReportsController.swift in Sources */,
+				650EBE07D86BA874EA2B44E5 /* NetworkRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +554,7 @@
 				490A249A1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD51C4AB5D6000BE592 /* Company.swift in Sources */,
 				7C6A729A1D6EF81A000064A0 /* ReportsController.swift in Sources */,
+				650EB82A854C5C22B917781B /* NetworkRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +576,7 @@
 				490A249B1C00DFF6004159E0 /* DateExtensions.swift in Sources */,
 				49B59CD61C4AB5D6000BE592 /* Company.swift in Sources */,
 				7C6A729B1D6EF81B000064A0 /* ReportsController.swift in Sources */,
+				650EB78F6E6A5033E614764A /* NetworkRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
