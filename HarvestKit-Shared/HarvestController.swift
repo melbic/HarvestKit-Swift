@@ -25,8 +25,10 @@ public final class HarvestController {
     /**
      The main request controller for the harvest framework. This will be shared amongst other sub controllers for making API requests.
      */
-    public let requestController: TSCRequestController
-
+    let requestController: TSCRequestController
+    
+    let apiClient:APIClient
+    
     /**
      The controller for managing Timers
      */
@@ -46,12 +48,12 @@ public final class HarvestController {
      The controller for managing clients
      */
     public let clientsController: ClientsController
-
+    
     /**
      The controller for managing reports
      */
     public let reportsController: ReportsController
-
+    
     /**
      Initialises a new harvest controller with the given credentials. You must supply credentials to log in and access the harvest API.
      
@@ -59,31 +61,31 @@ public final class HarvestController {
      - parameter username: The username of the account to log in with. This is usually the users email address
      - parameter password: The password for the supplied username
      */
-    public init?(accountName: String!, username: String!, password: String!) {
+    public init?(accountName: String?, username: String?, password: String?) {
         
-        guard let accountName = accountName, let username = username, let password = password  else {
+        guard let baseURL =  URL(string: "https://\(accountName!).harvestapp.com"), let username = username, let password = password  else {
             return nil
         }
-        requestController = TSCRequestController(baseAddress: "https://\(accountName).harvestapp.com")
         
-        let userPasswordString = "\(username):\(password)"
-        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
+        
+        let userPasswordData = "\(username):\(password)".data(using: String.Encoding.utf8)
         let base64EncodedCredential = userPasswordData?.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
-        if let base64Cred = base64EncodedCredential {
-            let authString = "Basic \(base64Cred)"
-            requestController.sharedRequestHeaders["Authorization"] = authString
+        guard let base64Cred = base64EncodedCredential else {
+            return nil
             
         }
+        let authString = "Basic \(base64Cred)"
+        let headers:[AnyHashable:Any] = ["Authorization":authString, "Accept":"application/json"]
         
-        requestController.sharedRequestHeaders["Accept"] = "application/json"
-        
+        apiClient = APIClient(baseURL:baseURL, headers:headers)
+        requestController = TSCRequestController()
         //Setup sub controllers
         timersController = TimersController(requestController: requestController)
         contactsController = ContactsController(requestController: requestController)
         accountController = AccountController(requestController: requestController)
         clientsController = ClientsController(requestController: requestController)
         reportsController = ReportsController(requestController: requestController)
-
+        
     }
     
     //MARK: - Users
@@ -95,7 +97,7 @@ public final class HarvestController {
      */
     public func getUsers(_ completionHandler: @escaping (_ users: [User?]?, _ requestError: NSError?) -> ()) {
         
-        requestController.get("people") { (response: TSCRequestResponse?, requestError: Error?) -> Void in
+        apiClient.get("people") { (response: JsonResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
                 completionHandler(nil, error as NSError?)
@@ -127,7 +129,7 @@ public final class HarvestController {
      */
     public func getProjects(_ completionHandler: @escaping (_ projects: [Project?]?, _ requestError: NSError?) -> ()) {
         
-        requestController.get("projects") { (response: TSCRequestResponse?, requestError: Error?) -> () in
+        apiClient.get("projects") { (response: JsonResponse?, requestError: Error?) -> () in
             
             if let error = requestError {
                 completionHandler(nil, error as NSError?)
@@ -157,7 +159,7 @@ public final class HarvestController {
      */
     public func getClients(_ completionHandler: @escaping (_ clients: [Client?]?, _ requestError: NSError?) -> ()) {
         
-        requestController.get("clients") { (response: TSCRequestResponse?, requestError: Error?) -> Void in
+        apiClient.get("clients") { (response: JsonResponse?, requestError: Error?) -> Void in
             
             if let error = requestError {
                 completionHandler(nil, error as NSError?)
