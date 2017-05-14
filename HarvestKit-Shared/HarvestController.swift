@@ -59,8 +59,11 @@ public final class HarvestController {
      - parameter username: The username of the account to log in with. This is usually the users email address
      - parameter password: The password for the supplied username
      */
-    public init(accountName: String!, username: String!, password: String!) {
+    public init?(accountName: String!, username: String!, password: String!) {
         
+        guard let accountName = accountName, let username = username, let password = password  else {
+            return nil
+        }
         requestController = TSCRequestController(baseAddress: "https://\(accountName).harvestapp.com")
         
         let userPasswordString = "\(username):\(password)"
