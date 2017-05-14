@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import ThunderRequest
 @testable import HarvestKitiOS
 
 class ModelTests: TestBase {
