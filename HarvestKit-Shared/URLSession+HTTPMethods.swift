@@ -22,7 +22,7 @@ extension URLSession {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         if let bodyParams = bodyParams {
-            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try JSONSerialization.data(withJSONObject: bodyParams)
         }
         
