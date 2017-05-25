@@ -102,5 +102,13 @@ public struct Client {
         defaultInvoiceTimeframe = clientDictionary["default_invoice_timeframe"] as? String
         statementKey = clientDictionary["statement_key"] as? String
     }
-    
+}
+
+public extension Client {
+    public init(name:String, active:Bool?=nil, address:String?=nil, currencyName:String?=nil) {
+        self.name = name
+        self.active = active
+        self.address = address
+        self.currencyName = currencyName
+    }
 }
