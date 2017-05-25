@@ -157,25 +157,7 @@ public final class HarvestController {
      - parameters:
      - completionHandler: The completion handler to return clients and errors to
      */
-    public func getClients(_ completionHandler: @escaping (_ clients: [Client?]?, _ requestError: NSError?) -> ()) {
-        
-        apiClient.get("clients") { (response: JsonResponse?, requestError: Error?) -> Void in
-            
-            if let error = requestError {
-                completionHandler(nil, error as NSError?)
-                return;
-            }
-            
-            if let clientsArray = response?.array as? [[String: AnyObject]] {
-                
-                let clients = clientsArray.map({
-                    Client(dictionary: $0)
-                })
-                
-                completionHandler(clients, nil)
-            }
-            
-        }
-        
+    public func getClients(_ completionHandler: @escaping (_ clients: [Client]?, _ requestError: Error?) -> ()) {
+        clientsController.getClients(completionHandler)
     }
 }
