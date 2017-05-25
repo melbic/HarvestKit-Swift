@@ -83,7 +83,7 @@ public final class HarvestController {
         timersController = TimersController(requestController: requestController)
         contactsController = ContactsController(requestController: requestController)
         accountController = AccountController(requestController: requestController)
-        clientsController = ClientsController(requestController: requestController)
+        clientsController = ClientsController(requestController: apiClient)
         reportsController = ReportsController(requestController: requestController)
         
     }

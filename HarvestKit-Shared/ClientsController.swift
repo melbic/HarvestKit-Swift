@@ -8,14 +8,6 @@
 
 import Foundation
 
-#if os(iOS)
-    import ThunderRequest
-#elseif os(tvOS)
-    import ThunderRequestTV
-#elseif os (OSX)
-    import ThunderRequestMac
-#endif
-
 /** The client controller is responsible for adding, deleting and updating client information with the Harvest API. This controller will only work if your account has the client module enabled
  */
 public final class ClientsController {
@@ -23,13 +15,13 @@ public final class ClientsController {
     /**
      The request controller used to load contact information. This is shared with other controllers
      */
-    public let requestController: TSCRequestController
-
+    let requestController: APIClient
+    
     /**
      Initialises a new controller.
      - parameter requestController: The request controller to use when loading client information. This must be passed down from HarvestController so that authentication may be shared
      */
-    internal init(requestController: TSCRequestController) {
+    internal init(requestController: APIClient) {
         
         self.requestController = requestController
     }
@@ -49,20 +41,23 @@ public final class ClientsController {
             completion(ClientError.missingName)
             return
         }
-        
-        requestController.post("clients", bodyParams: client.serialisedObject) { (response: TSCRequestResponse?, error: Error?) in
-            
-            if let _error = error {
-                completion(_error)
-                return
+        do {
+            try requestController.post("clients", bodyParams: client.serialisedObject) { (response: JsonResponse?, error: Error?) in
+                
+                if let _error = error {
+                    completion(_error)
+                    return
+                }
+                
+                if let responseStatus = response?.status, responseStatus == 201 {
+                    completion(nil)
+                    return
+                }
+                
+                completion(ClientError.unexpectedResponseCode)
             }
-            
-            if let responseStatus = response?.status, responseStatus == 201 {
-                completion(nil)
-                return
-            }
-            
-            completion(ClientError.unexpectedResponseCode)
+        } catch {
+            completion(error)
         }
     }
     
@@ -75,7 +70,7 @@ public final class ClientsController {
      */
     public func get(_ clientIdentifier: Int, completion: @escaping (_ client: Client?, _ error: Error?) -> ()) {
         
-        requestController.get("clients/\(clientIdentifier)") { (response: TSCRequestResponse?, error: Error?) in
+        requestController.get("clients/\(clientIdentifier)") { (response: JsonResponse?, error: Error?) in
             
             if let _error = error {
                 completion(nil, _error)
@@ -100,7 +95,7 @@ public final class ClientsController {
      */
     public func getClients(_ completion: @escaping (_ clients: [Client]?, _ error: Error?) -> ()) {
         
-        requestController.get("clients") { (response: TSCRequestResponse?, error: Error?) in
+        requestController.get("clients") { (response: JsonResponse?, error: Error?) in
             
             if let _error = error {
                 completion(nil, _error)
@@ -133,20 +128,24 @@ public final class ClientsController {
             completion(ClientError.missingIdentifier)
             return
         }
-        
-        requestController.put("clients/\(clientIdentifier)", bodyParams: client.serialisedObject) { (response: TSCRequestResponse?, error: Error?) in
+        do {
             
-            if let _error = error {
-                completion(_error)
-                return
+            try requestController.put("clients/\(clientIdentifier)", bodyParams: client.serialisedObject) { (response: JsonResponse?, error: Error?) in
+                
+                if let _error = error {
+                    completion(_error)
+                    return
+                }
+                
+                if let responseStatus = response?.status, responseStatus == 200 {
+                    completion(nil)
+                    return
+                }
+                
+                completion(ClientError.unexpectedResponseCode)
             }
-            
-            if let responseStatus = response?.status, responseStatus == 200 {
-                completion(nil)
-                return
-            }
-            
-            completion(ClientError.unexpectedResponseCode)
+        } catch {
+            completion(error)
         }
         
     }
@@ -166,7 +165,7 @@ public final class ClientsController {
             return
         }
         
-        requestController.delete("clients/\(clientIdentifier)") { (response: TSCRequestResponse?, error: Error?) in
+        requestController.delete("clients/\(clientIdentifier)") { (response: JsonResponse?, error: Error?) in
             
             if let _error = error {
                 
@@ -203,26 +202,29 @@ public final class ClientsController {
             completion(ClientError.missingIdentifier)
             return
         }
-        
-        requestController.post("clients/\(clientIdentifier)/toggle", bodyParams: nil) { (response: TSCRequestResponse?, error: Error?) in
-            
-            if let _error = error {
+        do {
+            try requestController.post("clients/\(clientIdentifier)/toggle", bodyParams: nil) { (response: JsonResponse?, error: Error?) in
                 
-                if let responseStatus = response?.status, responseStatus == 400 {
-                    completion(ClientError.hasActiveProjects)
+                if let _error = error {
+                    
+                    if let responseStatus = response?.status, responseStatus == 400 {
+                        completion(ClientError.hasActiveProjects)
+                        return
+                    }
+                    
+                    completion(_error)
                     return
                 }
                 
-                completion(_error)
-                return
+                if let responseStatus = response?.status, responseStatus == 200 {
+                    completion(nil)
+                    return
+                }
+                
+                completion(ClientError.unexpectedResponseCode)
             }
-            
-            if let responseStatus = response?.status, responseStatus == 200 {
-                completion(nil)
-                return
-            }
-            
-            completion(ClientError.unexpectedResponseCode)
+        }catch {
+            completion(error)
         }
     }
 }
