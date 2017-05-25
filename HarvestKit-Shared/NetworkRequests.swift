@@ -8,6 +8,14 @@ import Foundation
 typealias Headers = [AnyHashable:Any]
 typealias  NetworkCompletion = (JsonResponse?, Error?)->()
 
+struct APIError:Error {
+    let message:String?
+    
+    var localizedDescription:String {
+        return message ?? "Unknown Error"
+    }
+}
+
 struct APIClient {
     let urlSession:URLSession
     let baseURL:URL
@@ -30,7 +38,12 @@ extension APIClient {
     
     private func dataTask(with endpoint: String, method:HTTPMethod = .get,  bodyParams:Any? = nil, completionHandler: @escaping NetworkCompletion) throws -> URLSessionDataTask {
         let dataTask = try urlSession.dataTask(with: baseURL.appendingPathComponent(endpoint), method:method, bodyParams:bodyParams){data, response, error in
-            completionHandler(JsonResponse(data, response:response), error)
+            let jsonResponse = JsonResponse(data, response:response)
+            var error = error
+            if let resp = jsonResponse, resp.status >= 300 && error == nil {
+                error = APIError(message:resp.errorMessage)
+            }
+            completionHandler(jsonResponse, error)
         }
         return dataTask
     }
@@ -96,6 +109,16 @@ extension JsonResponse {
             return jsonObject as? [String:Any]
         }
     }
+    var errorMessage:String? {
+         return dictionary?["message"] as? String
+    }
     
-    
+}
+
+
+extension Data {
+    func print() -> String? {
+        return String(data:self, encoding:String.Encoding.utf8)
+        
+    }
 }
