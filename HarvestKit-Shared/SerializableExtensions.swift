@@ -8,15 +8,19 @@
 
 import Foundation
 
+
+public protocol  APISerializable {
+    var serialisedObject: [String: AnyObject] {get}
+}
 /**
-Extends timer to make it serializable
-*/
-public extension Timer {
+ Extends timer to make it serializable
+ */
+extension Timer:APISerializable{
     
     /**
-    A dictionary representation of the timer which can be submitted to the API to create a new timer
-    */
-    var serialisedObject: [String: AnyObject] {
+     A dictionary representation of the timer which can be submitted to the API to create a new timer
+     */
+    public var serialisedObject: [String: AnyObject] {
         
         var mutableDictionary = [String: AnyObject]()
         
@@ -41,14 +45,14 @@ public extension Timer {
 }
 
 /**
-Extends contact to make it serializable
-*/
-public extension Contact {
+ Extends contact to make it serializable
+ */
+extension Contact:APISerializable {
     
     /**
-    A dictionary representation of the contact which can be submitted to the API to create a new contact or update an existing one
-    */
-    var serialisedObject: [String: AnyObject] {
+     A dictionary representation of the contact which can be submitted to the API to create a new contact or update an existing one
+     */
+    public var serialisedObject: [String: AnyObject] {
         
         var mutableDictionary = [String: AnyObject]()
         
@@ -85,7 +89,7 @@ public extension Contact {
         if let clientFax = faxNumber {
             mutableContactContainer["fax"] = clientFax as AnyObject?
         }
-                
+        
         mutableDictionary["contact"] = mutableContactContainer as AnyObject?
         
         return mutableDictionary
@@ -96,12 +100,12 @@ public extension Contact {
 /**
  Extends client to make it serializable
  */
-public extension Client {
+extension Client:APISerializable {
     
     /**
      A dictionary representation of the client which can be submitted to the API to create a new client or update an existing one
      */
-    var serialisedObject: [String: AnyObject] {
+    public var serialisedObject: [String: AnyObject] {
         
         var mutableDictionary = [String: AnyObject]()
         
@@ -110,7 +114,7 @@ public extension Client {
         if let _identifier = identifier {
             mutableClientContainer["id"] = _identifier as AnyObject?
         }
-
+        
         if let _name = name {
             mutableClientContainer["name"] = _name as AnyObject?
         }
@@ -162,5 +166,26 @@ public extension Client {
         mutableDictionary["client"] = mutableClientContainer as AnyObject?
         
         return mutableDictionary
+    }
+}
+
+extension Project:APISerializable {
+    public var serialisedObject: [String: AnyObject] {
+        var projectDict = [String:AnyObject]()
+        if let identifier = identifier {
+            projectDict["id"] = identifier as AnyObject
+        }
+        if let clientIdentifier = clientIdentifier {
+            projectDict["client_id"] = clientIdentifier as AnyObject
+        }
+        
+        if let name = name {
+            projectDict["name"] = name as AnyObject
+        }
+        if let active = active {
+            projectDict["active"] = active as AnyObject
+        }
+        
+        return ["project":projectDict as AnyObject]
     }
 }

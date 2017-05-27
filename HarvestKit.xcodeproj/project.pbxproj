@@ -65,8 +65,12 @@
 		49F8136B1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136C1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
 		49F8136D1CDD123300639B3A /* ClientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8136A1CDD123300639B3A /* ClientsController.swift */; };
+		650EB4D91FEED48053467F1A /* ProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */; };
+		650EB4DAA1A2BB6A20A64013 /* ProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */; };
 		650EB78F6E6A5033E614764A /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
 		650EB82A854C5C22B917781B /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
+		650EBB78BAAA66FFA501DA44 /* ProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */; };
+		650EBBF8BD070A796D6CD617 /* ProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */; };
 		650EBE07D86BA874EA2B44E5 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650EBA685D8BABDD25092F78 /* NetworkRequests.swift */; };
 		66AB5F741ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB5F731ED74DBD00136486 /* URLSession+HTTPMethods.swift */; };
 		66AB5F751ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB5F731ED74DBD00136486 /* URLSession+HTTPMethods.swift */; };
@@ -142,6 +146,7 @@
 		49EE8AB31C4A7059007BFC8B /* TimersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimersController.swift; path = "HarvestKit-Shared/TimersController.swift"; sourceTree = "<group>"; };
 		49EE8AB71C4A739C007BFC8B /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = "HarvestKit-Shared/Contact.swift"; sourceTree = "<group>"; };
 		49F8136A1CDD123300639B3A /* ClientsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientsController.swift; path = "HarvestKit-Shared/ClientsController.swift"; sourceTree = "<group>"; };
+		650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsController.swift; path = "HarvestKit-Shared/ProjectsController.swift"; sourceTree = "<group>"; };
 		650EBA685D8BABDD25092F78 /* NetworkRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequests.swift; path = "HarvestKit-Shared/NetworkRequests.swift"; sourceTree = "<group>"; };
 		66AB5F731ED74DBD00136486 /* URLSession+HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URLSession+HTTPMethods.swift"; path = "HarvestKit-Shared/URLSession+HTTPMethods.swift"; sourceTree = "<group>"; };
 		7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportsController.swift; path = "HarvestKit-Shared/ReportsController.swift"; sourceTree = "<group>"; };
@@ -271,6 +276,7 @@
 				49EE8AB31C4A7059007BFC8B /* TimersController.swift */,
 				49B59CCF1C4AB3DD000BE592 /* AccountController.swift */,
 				7C6A71FA1D6EAC67000064A0 /* ReportsController.swift */,
+				650EB2BD38A9CEF7A2F266C8 /* ProjectsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -540,6 +546,7 @@
 				66AB5F741ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */,
 				7C6A71FB1D6EAC67000064A0 /* ReportsController.swift in Sources */,
 				650EBE07D86BA874EA2B44E5 /* NetworkRequests.swift in Sources */,
+				650EB4D91FEED48053467F1A /* ProjectsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +570,7 @@
 				66AB5F751ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */,
 				7C6A729A1D6EF81A000064A0 /* ReportsController.swift in Sources */,
 				650EB82A854C5C22B917781B /* NetworkRequests.swift in Sources */,
+				650EB4DAA1A2BB6A20A64013 /* ProjectsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +594,7 @@
 				66AB5F761ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */,
 				7C6A729B1D6EF81B000064A0 /* ReportsController.swift in Sources */,
 				650EB78F6E6A5033E614764A /* NetworkRequests.swift in Sources */,
+				650EBB78BAAA66FFA501DA44 /* ProjectsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +607,7 @@
 				66AB5F771ED74DBD00136486 /* URLSession+HTTPMethods.swift in Sources */,
 				49EC2D061C42AC9C00B9FF49 /* HarvestKitTests.swift in Sources */,
 				49EC2D0F1C42ADD300B9FF49 /* ModelTests.swift in Sources */,
+				650EBBF8BD070A796D6CD617 /* ProjectsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,3 +60,11 @@ public struct Project {
     }
     
 }
+public extension Project {
+//TODO: Add Bill-By
+    public init(name:String, active:Bool, client:Client) {
+        self.name = name
+        self.active = active
+        self.clientIdentifier = client.identifier
+    }
+}
